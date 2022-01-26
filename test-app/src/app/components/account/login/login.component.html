@@ -1,17 +1,17 @@
-<div>
+<div class ="login=form-container">
   <h1>Login</h1>
-  <form [formGroup]="loginForm">
-    <div>
-      <label for="username">Login</label>
-      <input type="text" formControlName="username">
-    </div>
-    <div>
-      <label for="password">Password</label>
-      <input type="text" formControlName="password">
-    </div>
-    <div>
-      <button (click)="click()">login</button>
+  <form [formGroup]="loginForm" class="login(form)" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput type="text" formControlName="username">
+      <mat-label for="username">Login</mat-label>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" formControlName="password">
+      <mat-label for="password">Password</mat-label>
+    </mat-form-field>
+    <mat-form-field>
+      <button type="submit">login</button>
       <button (click)="click()">register</button>
-    </div>
+    </mat-form-field>
   </form>
 </div>

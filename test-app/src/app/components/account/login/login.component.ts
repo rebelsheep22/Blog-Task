@@ -25,4 +25,7 @@ export class LoginComponent implements OnInit {
   click(){
     this.router.navigate(['account/register'])
   }
+  onSubmit(){
+    console.log('login')
+  }
 }

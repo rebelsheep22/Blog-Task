@@ -19,7 +19,7 @@ import { ComponentsModule } from './components/components.module';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
