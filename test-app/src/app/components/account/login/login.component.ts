@@ -8,7 +8,7 @@ import { AlertService } from 'src/services/alert.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
@@ -20,24 +20,39 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private alertsService: AlertService,
     private accountService: AccountServiceService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: [null,[Validators.required, Validators.email,Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,9}$"
-      )]],
-      password: [null,[Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern("^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$")]]
-    })
+      email: [
+        null,
+        [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(
+            '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,9}$'
+          ),
+        ],
+      ],
+      password: [
+        null,
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        ],
+      ],
+    });
   }
-  get email(){
+  get email() {
     return this.loginForm.get(['email'])!.value;
   }
-  get pwd(){
+  get pwd() {
     return this.loginForm.get(['password'])!.value;
   }
-  click(){
-    this.router.navigate(['account/register'])
+  click() {
+    this.router.navigate(['account/register']);
   }
   onSubmit() {
     this.submitted = true;
@@ -45,23 +60,24 @@ export class LoginComponent implements OnInit {
     this.alertsService.clear();
 
     if (this.loginForm.invalid) {
-        return;
+      return;
     }
-    console.log(this.pwd)
+    console.log(this.pwd);
     this.loading = true;
-    this.accountService.login(this.email,this.pwd)
-        .pipe(first())
-        .subscribe({
-            next: () => {
-                // get return url from query parameters or default to home page
-                const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                this.router.navigateByUrl(returnUrl);
-            },
-            error: (error: any) => {
-              console.log("error")
-                this.alertsService.error(error);
-                this.loading = false;
-            }
-        });
-}
+    this.accountService
+      .login(this.email, this.pwd)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          // get return url from query parameters or default to home page
+          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+          this.router.navigateByUrl(returnUrl);
+        },
+        error: (error: any) => {
+          console.log('error');
+          this.alertsService.error(error);
+          this.loading = false;
+        },
+      });
+  }
 }

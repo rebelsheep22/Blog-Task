@@ -10,10 +10,10 @@
         <input matInput type="email" formControlName="email" />
         <mat-label for="email">Email</mat-label>
         <mat-error *ngIf="registerForm.controls['email'].errors?.['required']"
-          ><p>Please fill</p></mat-error
+          >Email is Required</mat-error
         >
-        <mat-error *ngIf="registerForm.controls['email'].errors?.['email']"
-          ><p>Invalid Email Format</p></mat-error
+        <mat-error *ngIf="registerForm.controls['email'].errors?.['pattern']"
+          >Invalid Email Format</mat-error
         >
       </mat-form-field>
       <mat-form-field class="register-form__full-name">
