@@ -8,6 +8,8 @@ import { RegisterComponent } from './register/register.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import { MaterialModule } from 'src/app/material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertsComponent } from '../alerts';
 
 
 @NgModule({

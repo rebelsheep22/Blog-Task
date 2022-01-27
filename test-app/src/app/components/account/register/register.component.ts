@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
+import { AccountServiceService } from 'src/services/account-service.service';
+import { AlertService } from 'src/services/alert.service';
+import { ConfirmPasswords } from '../ConfirmPasswords.validator';
 
 @Component({
   selector: 'app-register',
@@ -9,23 +13,50 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder,
+  loading = false;
+  submitted = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private accountService: AccountServiceService,
+    private alertsService: AlertService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
-      fullName: [null,Validators.required,Validators.minLength(5),Validators.maxLength(20)],
-      password: [null,Validators.required],
-      repeatPassword: [null,Validators.required],
-      email: [null,Validators.required, Validators.email],
+      fullName: [null,[Validators.required,Validators.minLength(5),Validators.maxLength(20)]],
+      passwords: this.formBuilder.group({
+        password: [null, [Validators.required,Validators.minLength(4),Validators.maxLength(30),Validators.pattern("^(?:[0-9]+[a-z]|[a-z]+[0-9])[a-z0-9]*$")]],
+        repeatPassword: [null,Validators.required],
+      },{validator: ConfirmPasswords('password','repeatPassword')}),
+      email: [null,[Validators.required, Validators.email]],
     })
   }
   onSubmit(): void{
-    console.log("submit")
+    console.log(this.registerForm.value)
+    this.submitted = true;
+    this.alertsService.clear();
+    if(this.registerForm.invalid){
+      return;
+    }
+    this.loading = true;
+    this.accountService.register(this.registerForm.value).pipe(first()).subscribe({
+      next: () => {
+        this.alertsService.success('Registration successful', {
+          keepAfterRouteChange: true,
+        });
+        this.router.navigate(['../login'], { relativeTo: this.route });
+      },
+      error: (error) => {
+        this.alertsService.error(error);
+        this.loading = false;
+      },
+    })
   }
   backToLogin(): void{
     this.router.navigate(['account/login'])
+
   }
 
 }

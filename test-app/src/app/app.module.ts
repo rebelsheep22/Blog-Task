@@ -4,14 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AlertComponent } from './alert/alert.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './components/components.module';
+import { mockBackendProvider } from './helpers/mock-backend';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertsComponent } from './components/alerts';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertComponent
+    AlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -20,8 +22,9 @@ import { ComponentsModule } from './components/components.module';
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [mockBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
