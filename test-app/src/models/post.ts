@@ -1,8 +1,8 @@
 export class Post{
   id?: string;
-  title?: string;
-  description?: string;
+  title?: any;
+  description?:any;
   content?: string;
-  imgURL?: string;
-  uploadDate?: string;
+  imgURL?: any;
+  uploadDate?: any;
 }

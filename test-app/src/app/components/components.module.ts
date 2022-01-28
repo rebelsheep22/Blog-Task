@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { MaterialModule } from '../material.module';
 import { PostTemplateComponent } from './post-template/post-template.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -14,14 +16,16 @@ import { PageHeaderComponent } from './page-header/page-header.component';
 
     HomeComponent,
      PostTemplateComponent,
-     PageHeaderComponent
+     PageHeaderComponent,
+     CreatePostComponent
   ],
   imports: [
     CommonModule,
     AccountModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatDialogModule
   ]
 })
 export class ComponentsModule { }

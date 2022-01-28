@@ -1,7 +1,7 @@
 @import "../../../assets/color-palette.scss";
 .header{
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   border: 1px solid;
   height: 60px;
   background:$main-color;

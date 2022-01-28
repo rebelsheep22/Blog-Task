@@ -9,6 +9,8 @@ import { ComponentsModule } from './components/components.module';
 import { mockBackendProvider } from './helpers/mock-backend';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertsComponent } from './components/alerts';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { AlertsComponent } from './components/alerts';
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   providers: [mockBackendProvider],
   bootstrap: [AppComponent]
