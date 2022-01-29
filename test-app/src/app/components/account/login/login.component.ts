@@ -62,7 +62,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.pwd);
     this.loading = true;
     this.accountService
       .login(this.email, this.pwd)
@@ -74,7 +73,6 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(returnUrl);
         },
         error: (error: any) => {
-          console.log('error');
           this.alertsService.error(error);
           this.loading = false;
         },
