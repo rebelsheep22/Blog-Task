@@ -8,6 +8,7 @@ import { PostTemplateComponent } from './post-template/post-template.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FullPostComponent } from './full-post/full-post.component';
 
 
 
@@ -17,7 +18,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     HomeComponent,
      PostTemplateComponent,
      PageHeaderComponent,
-     CreatePostComponent
+     CreatePostComponent,
+     FullPostComponent
   ],
   imports: [
     CommonModule,

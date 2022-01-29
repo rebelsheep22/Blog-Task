@@ -67,7 +67,6 @@ export class RegisterComponent implements OnInit {
     });
   }
   onSubmit(): void {
-    console.log(this.registerForm.value);
     this.submitted = true;
     this.alertsService.clear();
     if (this.registerForm.invalid) {

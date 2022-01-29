@@ -34,7 +34,6 @@ export class AlertsComponent implements OnInit, OnDestroy {
         if (alert.autoClose) {
           setTimeout(() => this.removeAlert(alert), 3000);
         }
-        console.log(this.alerts)
       });
 
     this.routeSubscription = this.router.events.subscribe((event) => {

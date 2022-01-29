@@ -1,21 +1,38 @@
 .post{
   width: 20%;
   margin: 10px;
-  border: 1px solid #0d1137;
-  border-radius: 5px;
+  border: solid 1px black ;
+  border-radius: 30px;
   padding: 5px;
+  .header{
+    text-align: center;
+  }
   &__image{
 
     img{
       width:100%;
+      cursor: pointer;
     }
   }
   &__text{
     display: flex;
+
+  }
+  &__description{
+    a{
+      cursor: pointer;
+      color:rebeccapurple;
+    }
   }
 }
 .container{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
+.form-btn{
+  width: 400px;
+  margin-top: 10px;
+  z-index: 1;
+}
+

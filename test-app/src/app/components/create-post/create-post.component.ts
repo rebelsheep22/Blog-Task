@@ -22,6 +22,7 @@ export class CreatePostComponent implements OnInit {
       content: [null, Validators.required],
       imgURL: [null],
       uploadDate: [null],
+      id:[null]
     });
     this.imageArray = [];
   }
@@ -29,6 +30,9 @@ export class CreatePostComponent implements OnInit {
   fileChoosen(event: any) {
     // if (event.target.value) {
     //   console.log(event);
+    // }
+    // if(event.target.files[0].size>2048000){
+    //    this.createPostForm.invalid;
     // }
     let files = event.target.files;
     let file = files[0]
@@ -47,7 +51,6 @@ export class CreatePostComponent implements OnInit {
   }
   shorten(){
     let string= this.createPostForm.controls["content"].value;
-    console.log(string)
     let shortenedString = string.split(" ").splice(0,60).join(" ");
     this.createPostForm.controls["description"].setValue(shortenedString)
 
@@ -62,9 +65,7 @@ export class CreatePostComponent implements OnInit {
   }
   savePost(){
     this.shorten();
-    console.log(this.createPostForm.controls)
     this.getDate()
-
   }
 
 cancelClick(){

@@ -1,3 +1,2 @@
-<app-page-header></app-page-header>
-
-<app-post-template></app-post-template>
+<app-page-header (newItemEvent)="log($event)"></app-page-header>
+<app-post-template [openDialog]="this.openTemplate"></app-post-template>

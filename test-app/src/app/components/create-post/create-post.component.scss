@@ -2,3 +2,17 @@
   display: flex;
   flex-direction: column;
 }
+.mat-dialog-actions{
+  margin-top: 40px;
+}
+body{
+  height: 100%;
+  overflow-y:hidden;
+
+}
+#content{
+  resize: none;
+}
+.create-post-container{
+  height: 100%;
+}

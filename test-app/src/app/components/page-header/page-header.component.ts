@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountServiceService } from 'src/services/account-service.service';
 
@@ -8,6 +8,8 @@ import { AccountServiceService } from 'src/services/account-service.service';
   styleUrls: ['./page-header.component.scss'],
 })
 export class PageHeaderComponent implements OnInit {
+  @Output() newItemEvent = new EventEmitter<boolean>();
+  openDialog= false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -16,7 +18,11 @@ export class PageHeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
+    this.openDialog = false;
+  }
+  addNewPost(){
+    this.openDialog = true;
+    this.newItemEvent.emit(this.openDialog);
   }
   logout(): void {
     this.accountService.logout();

@@ -1,0 +1,11 @@
+.post{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  &-header{
+    align-self: center;
+  }
+  &-image{
+    align-self: center;
+  }
+}
