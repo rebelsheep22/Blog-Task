@@ -1,16 +1,19 @@
 <div class="header">
   <h1 class="header__title">Blog</h1>
   <div class="header__btns">
-  <button
-  mat-raised-button
-  color="accent"
-  class="header__btn-add"
-  (click)="addNewPost()"
->
-  Add Post
-</button>
-<button mat-button color="primary" class="form-btn" (click)="logout()">
-  Log Out
-</button>
-</div>
+    <button
+      mat-raised-button
+      color="accent"
+      class="header__btn-add"
+      (click)="addNewPost()"
+    >
+      Add Post
+    </button>
+    <button mat-flat-button color="primary" class="form-btn" (click)="usersPage()">
+      Users Page
+    </button>
+    <button mat-flat-button color="warn" class="form-btn" (click)="logout()">
+      Log Out
+    </button>
+  </div>
 </div>

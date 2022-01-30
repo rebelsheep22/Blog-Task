@@ -9,8 +9,8 @@ const accountModule = () =>
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'account', loadChildren: accountModule },
-  { path: 'posts/:id', component: FullPostComponent },
-  { path: 'users', component: UsersPageComponent},
+  { path: 'posts/:id', component: FullPostComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersPageComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 

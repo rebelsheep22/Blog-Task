@@ -1,5 +1,5 @@
 .post{
-  width: 10%;
+  width: 15%;
   height:fit-content;
   min-height: 850px;
   margin: 10px;
@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  background-color: yellow;
+  background-color: black;
   .header{
     text-align: center;
     border-bottom: 1px solid;
@@ -19,6 +19,7 @@
     img{
       width:100%;
       cursor: pointer ;
+      border-radius: 10px;
     }
   }
   &__text{

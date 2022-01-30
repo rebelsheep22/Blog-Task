@@ -2,4 +2,12 @@
   table{
   width: 100%;
 }
+&__header{
+  display: flex;
+  justify-content: space-between;
+  h1{
+    padding-top: 5px;
+    padding-left: 5px;
+  }
+}
 }

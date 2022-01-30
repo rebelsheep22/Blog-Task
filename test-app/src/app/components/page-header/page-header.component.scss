@@ -8,6 +8,8 @@
   background:$main-color;
   overflow:hidden;
   width: 100%;
+  background: rgb(70,110,252);
+background: linear-gradient(90deg, rgba(70,110,252,1) 0%, rgba(14,14,14,1) 100%);
   z-index: 999px;
   top:0;
   position: sticky;
@@ -21,4 +23,8 @@
   &__btn-add{
     margin-right: 10px;
   }
+
 }
+.form-btn{
+  margin-right: 10px;
+  }

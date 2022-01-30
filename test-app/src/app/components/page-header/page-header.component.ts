@@ -27,5 +27,7 @@ export class PageHeaderComponent implements OnInit {
   logout(): void {
     this.accountService.logout();
   }
-
+  usersPage():void{
+    this.router.navigateByUrl('/users')
+  }
 }

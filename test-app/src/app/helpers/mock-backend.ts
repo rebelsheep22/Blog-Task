@@ -33,6 +33,13 @@ export class MockBackendInterceptor implements HttpInterceptor {
       else if (url.endsWith('users/author') && method == 'GET'){
         return getAuthorUser();
       }
+      else if (url.endsWith('/users') && method == 'GET'){
+        return getUsers();
+      }
+      else if (url.match(/\/users\/\d+$/) && method == 'PUT'){
+        console.log('zzd')
+        return changeRoles();
+      }
     }
     function authenticate() {
       const { email, password } = body;
@@ -49,11 +56,11 @@ export class MockBackendInterceptor implements HttpInterceptor {
       id: any;
       fullName: any;
       email: any;
-      userGroup: any;
+      groups: any;
       creationDate: any;
     }) {
-      const { id, fullName, email, userGroup, creationDate} = user;
-      return { id, fullName, email, userGroup, creationDate };
+      const { id, fullName, email, groups, creationDate} = user;
+      return { id, fullName, email, groups, creationDate };
     }
     function postDetails(post: {
       id: any;
@@ -86,6 +93,15 @@ export class MockBackendInterceptor implements HttpInterceptor {
     function isLoggedIn() {
       return headers.get('Authorization') === 'Bearer fake-jwt-token';
     }
+    function changeRoles(){
+      let params = body;
+      console.log(params)
+      let user = users.find((x: { id: string; }) => x.id == idFromUrl());
+      Object.assign(user, params);
+      localStorage.setItem(usersKey, JSON.stringify(users));
+
+      return ok();
+    }
     function unauthorized() {
       return throwError({
         status: 401,
@@ -109,7 +125,7 @@ let authoringUser = JSON.parse(localStorage.getItem('user')!) || [];
       return urlParts[urlParts.length - 1];
     }
     function getUsers() {
-      return ok(users.map((x: { id: any; fullName: any; email: any; userGroup: any; creationDate: any; }) => basicDetails(x)));
+      return ok(users.map((x: { id: any; fullName: any; email: any; groups: any; creationDate: any; }) => basicDetails(x)));
     }
     function error(message: string) {
       return throwError({ error: { message } }).pipe(

@@ -46,6 +46,11 @@ export class AccountServiceService {
       this.router.navigate(['/account/login']);
     }
   }
+  // changePermission(id:string,params:any){
+  //   console.log((`${environment.apiUrl}/users/${id}`))
+  //   return this.http.put<Users[]>(`${environment.apiUrl}/users/${id}`, params);
+
+  // }
 
   public get userValue(): any {
     return this.userSubject.value;

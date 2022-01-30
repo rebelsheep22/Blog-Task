@@ -10,6 +10,9 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FullPostComponent } from './full-post/full-post.component';
 import { UsersPageComponent } from './users-page/users-page.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -29,7 +32,8 @@ import { UsersPageComponent } from './users-page/users-page.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ]
 })
 export class ComponentsModule { }
