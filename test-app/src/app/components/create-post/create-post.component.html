@@ -10,6 +10,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="textarea">
         <textarea rows="10" id="content" matInput formControlName="content" placeholder="Content"></textarea>
+        <mat-error> Post content must be from 100 to 500 words</mat-error>
       </mat-form-field>
   <div class="upload-pic">
         <input  type="file" id="imgURL" (change)="fileChoosen($event)">

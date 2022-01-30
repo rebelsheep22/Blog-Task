@@ -20,7 +20,11 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   loading = false;
   submitted = false;
-
+  userRoles= [
+    "Reader",
+    "Editor",
+    "Admin"
+  ]
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -47,7 +51,7 @@ export class RegisterComponent implements OnInit {
               Validators.required,
               Validators.minLength(4),
               Validators.maxLength(30),
-              Validators.pattern("^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$"),
+              Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
             ],
           ],
           repeatPassword: [null, Validators.required],
@@ -64,9 +68,12 @@ export class RegisterComponent implements OnInit {
           ),
         ],
       ],
+      groups: [null],
+      creationDate: [null],
     });
   }
   onSubmit(): void {
+    this.getDate()
     this.submitted = true;
     this.alertsService.clear();
     if (this.registerForm.invalid) {
@@ -91,5 +98,13 @@ export class RegisterComponent implements OnInit {
   }
   backToLogin(): void {
     this.router.navigate(['account/login']);
+  }
+  getDate(){
+    let currentDate= new Date;
+    let date = currentDate.getFullYear()+'-'+(currentDate.getMonth()+1)+'-'+currentDate.getDate();
+    let time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+    let creationDate = date + " " + time
+    this.registerForm.controls["creationDate"].setValue(creationDate)
+
   }
 }

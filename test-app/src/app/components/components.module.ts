@@ -9,6 +9,7 @@ import { PageHeaderComponent } from './page-header/page-header.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FullPostComponent } from './full-post/full-post.component';
+import { UsersPageComponent } from './users-page/users-page.component';
 
 
 
@@ -19,7 +20,8 @@ import { FullPostComponent } from './full-post/full-post.component';
      PostTemplateComponent,
      PageHeaderComponent,
      CreatePostComponent,
-     FullPostComponent
+     FullPostComponent,
+     UsersPageComponent
   ],
   imports: [
     CommonModule,

@@ -36,6 +36,9 @@ export class AccountServiceService {
     return this.http.get<Users>(`${environment.apiUrl}/users/author`)
 
   }
+  getUsers(){
+    return this.http.get<Users[]>(`${environment.apiUrl}/users`);
+  }
   logout() {
     if (confirm('Are you sure you want to log out?')) {
       localStorage.removeItem('user');

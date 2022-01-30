@@ -48,9 +48,12 @@ export class MockBackendInterceptor implements HttpInterceptor {
     function basicDetails(user: {
       id: any;
       fullName: any;
+      email: any;
+      userGroup: any;
+      creationDate: any;
     }) {
-      const { id, fullName} = user;
-      return { id, fullName };
+      const { id, fullName, email, userGroup, creationDate} = user;
+      return { id, fullName, email, userGroup, creationDate };
     }
     function postDetails(post: {
       id: any;
@@ -104,6 +107,9 @@ let authoringUser = JSON.parse(localStorage.getItem('user')!) || [];
     function idFromUrl() {
       const urlParts = url.split('/');
       return urlParts[urlParts.length - 1];
+    }
+    function getUsers() {
+      return ok(users.map((x: { id: any; fullName: any; email: any; userGroup: any; creationDate: any; }) => basicDetails(x)));
     }
     function error(message: string) {
       return throwError({ error: { message } }).pipe(

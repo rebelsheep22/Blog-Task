@@ -10,10 +10,11 @@ import {MatButtonModule} from '@angular/material/button';
 import { MaterialModule } from 'src/app/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertsComponent } from '../alerts';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
   declarations: [LoginComponent,RegisterComponent, DashboardComponent],
-  imports: [CommonModule,AccountRoutingModule, FormsModule, ReactiveFormsModule,MaterialModule],
+  imports: [CommonModule,AccountRoutingModule, FormsModule, ReactiveFormsModule,MaterialModule,MatSelectModule],
 })
 export class AccountModule {}

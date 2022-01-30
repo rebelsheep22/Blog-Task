@@ -7,4 +7,6 @@ export class Users {
   };
   fullName?:string
   token?: string;
+  groups?: string;
+  creationDate?: string;
 }

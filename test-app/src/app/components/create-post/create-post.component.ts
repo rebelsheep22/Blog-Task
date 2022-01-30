@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Users } from 'src/models/users';
 import { AccountServiceService } from 'src/services/account-service.service';
+import { contentSize } from './ContentSize.validator';
 
 @Component({
   selector: 'app-create-post',
@@ -22,7 +23,7 @@ export class CreatePostComponent implements OnInit {
     this.createPostForm = this.formBuilder.group({
       title: [null, [Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
       description: [null],
-      content: [null, Validators.required],
+      content: [null, [Validators.required, contentSize()]],
       imgURL: [null],
       uploadDate: [null],
       author: [null],
