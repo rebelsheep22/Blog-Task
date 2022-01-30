@@ -39,6 +39,9 @@ export class AccountServiceService {
   getUsers(){
     return this.http.get<Users[]>(`${environment.apiUrl}/users`);
   }
+  getCurrentUser(){
+    return this.http.get<Users[]>((`${environment.apiUrl}/currentUsers`))
+  }
   logout() {
     if (confirm('Are you sure you want to log out?')) {
       localStorage.removeItem('user');

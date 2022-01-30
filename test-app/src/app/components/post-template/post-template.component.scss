@@ -13,6 +13,7 @@
   .header{
     text-align: center;
     border-bottom: 1px solid;
+    color: white;
   }
   &__image{
 
@@ -27,13 +28,17 @@
 
   }
   &__description{
+    color: white;
     a{
       cursor: pointer;
-      color:rebeccapurple;
+      color:gainsboro;
     }
   }
   &__footer{
     padding-bottom: 15px;
+    p{
+      color: gray;
+    }
   }
 }
 .container{

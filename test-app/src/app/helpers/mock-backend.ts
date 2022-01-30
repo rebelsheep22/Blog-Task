@@ -36,10 +36,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
       else if (url.endsWith('/users') && method == 'GET'){
         return getUsers();
       }
-      else if (url.match(/\/users\/\d+$/) && method == 'PUT'){
-        console.log('zzd')
-        return changeRoles();
+      else if (url.endsWith('/currentusers') && method == 'GET'){
+        return getCurrentUser();
       }
+
     }
     function authenticate() {
       const { email, password } = body;
@@ -93,14 +93,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
     function isLoggedIn() {
       return headers.get('Authorization') === 'Bearer fake-jwt-token';
     }
-    function changeRoles(){
-      let params = body;
-      console.log(params)
-      let user = users.find((x: { id: string; }) => x.id == idFromUrl());
-      Object.assign(user, params);
-      localStorage.setItem(usersKey, JSON.stringify(users));
-
-      return ok();
+    function getCurrentUser(){
+      const user = JSON.parse(localStorage.getItem('user')!) || [];
+      console.log(user)
+      return ok(basicDetails(user))
     }
     function unauthorized() {
       return throwError({
