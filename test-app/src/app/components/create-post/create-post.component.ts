@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Users } from 'src/models/users';
+import { AccountServiceService } from 'src/services/account-service.service';
 
 @Component({
   selector: 'app-create-post',
@@ -9,7 +11,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class CreatePostComponent implements OnInit {
   createPostForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder, public dialogRef: MatDialogRef<CreatePostComponent>,
+  author: string|undefined;
+  constructor(private formBuilder: FormBuilder, public accountService:AccountServiceService,public dialogRef: MatDialogRef<CreatePostComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
   private base64textString:String="";
   imageArray!:string[];
@@ -17,25 +20,30 @@ export class CreatePostComponent implements OnInit {
   disableSubmit = true;
   ngOnInit(): void {
     this.createPostForm = this.formBuilder.group({
-      title: [null, [Validators.required,Validators.minLength(5)]],
+      title: [null, [Validators.required,Validators.minLength(5),Validators.maxLength(15)]],
       description: [null],
       content: [null, Validators.required],
       imgURL: [null],
       uploadDate: [null],
+      author: [null],
       id:[null]
     });
     this.imageArray = [];
+    this.setAuthor();
+    // this.createPostForm.controls['imgURL'].setErrors(null)
+    this.createPostForm.statusChanges.subscribe(x=>{
+      console.log(x)
+    })
   }
 
   fileChoosen(event: any) {
-    // if (event.target.value) {
-    //   console.log(event);
-    // }
-    // if(event.target.files[0].size>2048000){
-    //    this.createPostForm.invalid;
-    // }
     let files = event.target.files;
     let file = files[0]
+    if(file.size>2048000){
+      this.createPostForm.controls['imgURL'].setErrors({filesize: true})
+      return;
+    }
+    this.createPostForm.setErrors(null);
     if(files && file){
       let reader = new FileReader();
       reader.onload = this._handlereaderLoaded.bind(this);
@@ -63,9 +71,15 @@ export class CreatePostComponent implements OnInit {
     this.createPostForm.controls["uploadDate"].setValue(uploadDate)
 
   }
+  setAuthor(){
+    this.accountService.getUserAuthor().subscribe((x:Users)=>
+    {this.createPostForm.controls["author"].setValue(x.fullName)})
+
+  }
   savePost(){
+    this.setAuthor();
     this.shorten();
-    this.getDate()
+    this.getDate();
   }
 
 cancelClick(){

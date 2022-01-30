@@ -6,13 +6,15 @@
       <mat-form-field>
         <input type="text" matInput formControlName="title">
         <mat-label for="title">Title</mat-label>
+        <mat-error *ngIf="createPostForm.controls['title'].errors">The title must be 5-15 characters long</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="textarea">
         <textarea rows="10" id="content" matInput formControlName="content" placeholder="Content"></textarea>
       </mat-form-field>
   <div class="upload-pic">
-    <input  type="file" id="imgURL" required  (change)="fileChoosen($event)">
+        <input  type="file" id="imgURL" (change)="fileChoosen($event)">
         <label for="imgURL" class="md-button md-raised md-primary">Choose Files</label>
+        <mat-error *ngIf="createPostForm.controls['imgURL'].invalid">File size must be smaller than <strong>2mb</strong></mat-error>
       </div>
       </form>
       <div mat-dialog-actions>

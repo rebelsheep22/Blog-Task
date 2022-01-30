@@ -5,4 +5,5 @@ export class Post{
   content?: string;
   imgURL?: any;
   uploadDate?: any;
+  author?:any;
 }

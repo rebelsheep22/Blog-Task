@@ -19,6 +19,7 @@ export class PostTemplateComponent implements OnInit {
   content!: string;
   description!: string;
   uploadDate!:string;
+  author!: string;
   @Input() openDialog!: any;
   constructor(public dialog: MatDialog, private router: Router) {}
 
@@ -35,19 +36,20 @@ export class PostTemplateComponent implements OnInit {
   addNewPost(): void {
     const dialogRef = this.openDialog;
     dialogRef.afterClosed().subscribe((res: any) => {
-      if (res.invalid) return;
+      if (!res) return;
       this.imageURL = res.imgURL.value;
       this.title = res.title.value;
       this.content = res.content.value;
       this.description = res.description.value;
       this.uploadDate = res.uploadDate.value;
+      this.author = res.author.value;
       this.singlePost = {
         title: this.title,
         content: this.content,
         imgURL: this.imageURL,
         description: this.description,
         uploadDate: this.uploadDate,
-
+        author:this.author
       };
       this.posts.push(this.singlePost);
       this.singlePost.id=this.posts.indexOf(this.singlePost).toString();

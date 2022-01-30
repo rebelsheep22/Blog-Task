@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { Post } from 'src/models/post';
+import { Users } from 'src/models/users';
+import { AccountServiceService } from 'src/services/account-service.service';
 import { PostService } from 'src/services/post.service';
 
 @Component({
@@ -18,7 +20,8 @@ export class FullPostComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private accountService: AccountServiceService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +32,8 @@ export class FullPostComponent implements OnInit {
       imgURL:[null],
       uploadDate:[null],
       title:[null],
-      id:[null]
+      id:[null],
+      author:[null]
     });
     this.postService
       .getById((parseInt(this.id)-1).toString())
@@ -37,6 +41,6 @@ export class FullPostComponent implements OnInit {
       .subscribe((x) => this.post = x);
   }
   goBack(): void {
-    this.router.navigate(['']);
+     this.router.navigate(['']);
   }
 }

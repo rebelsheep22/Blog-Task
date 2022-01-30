@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Users } from 'src/models/users';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,11 @@ export class AccountServiceService {
           return user;
         })
       );
+  }
+  getUserAuthor(){
+    // const current
+    return this.http.get<Users>(`${environment.apiUrl}/users/author`)
+
   }
   logout() {
     if (confirm('Are you sure you want to log out?')) {

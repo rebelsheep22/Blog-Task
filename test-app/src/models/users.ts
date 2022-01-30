@@ -5,7 +5,6 @@ export class Users {
     password: string,
     repeatPassword: string
   };
-  firstName?: string;
-  lastName?: string;
+  fullName?:string
   token?: string;
 }

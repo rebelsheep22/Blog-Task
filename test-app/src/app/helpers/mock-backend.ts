@@ -30,6 +30,9 @@ export class MockBackendInterceptor implements HttpInterceptor {
       } else if (url.match(/\/posts\/\d+$/) && method === 'GET') {
         return getPostById();
       }
+      else if (url.endsWith('users/author') && method == 'GET'){
+        return getAuthorUser();
+      }
     }
     function authenticate() {
       const { email, password } = body;
@@ -44,12 +47,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
     }
     function basicDetails(user: {
       id: any;
-      username: any;
-      firstName: any;
-      lastName: any;
+      fullName: any;
     }) {
-      const { id, username, firstName, lastName } = user;
-      return { id, username, firstName, lastName };
+      const { id, fullName} = user;
+      return { id, fullName };
     }
     function postDetails(post: {
       id: any;
@@ -57,9 +58,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
       content: any;
       imgURL: any;
       uploadDate: any;
+      author:any;
     }) {
-      const { id, title, content, imgURL, uploadDate } = post;
-      return { id, title, content, imgURL, uploadDate };
+      const { id, title, content, imgURL, uploadDate,author } = post;
+      return { id, title, content, imgURL, uploadDate,author };
     }
     function register() {
       const user = body;
@@ -92,23 +94,13 @@ export class MockBackendInterceptor implements HttpInterceptor {
       const post = posts.find((x: { id: any }) => x.id === idFromUrl());
       return ok(postDetails(post));
     }
-    function getPosts() {
-      let posts = JSON.parse(localStorage.getItem(postsKey)!) || [];
+    function getAuthorUser(){
+let authoringUser = JSON.parse(localStorage.getItem('user')!) || [];
 
-      if (!isLoggedIn()) return unauthorized();
-      return ok(
-        posts.map(
-          (x: {
-            id: any;
-            title: any;
-            content: any;
-            imgURL: any;
-            uploadDate: any;
-          }) => postDetails(x)
-        )
-      );
+      const authorId = authoringUser.id;
+      const user = users.find((x: { id: string; })=> x.id == authorId)
+      return ok(basicDetails(user))
     }
-
     function idFromUrl() {
       const urlParts = url.split('/');
       return urlParts[urlParts.length - 1];
