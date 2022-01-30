@@ -8,12 +8,9 @@ import { CreatePostComponent } from '../create-post/create-post.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   constructor(public dialog: MatDialog) {}
   openTemplate!:any;
-  ngOnInit(): void {
-
-  }
   log(event:any){
     if(event === false)return;
     this.openTemplate= this.dialog.open(CreatePostComponent, {

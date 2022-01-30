@@ -9,9 +9,9 @@
         {{ post.description }}...<a (click)="openFullPost(posts,post)"> see more </a>
       </p>
     </div>
-    <div>
+    <div class="post__footer">
       <p>Date Added: {{ post.uploadDate }}</p>
-      <button mat-raised-button (click)="openFullPost(posts,post)">Open Post</button>
+      <button mat-flat-button color="primary" (click)="openFullPost(posts,post)">Open Post</button>
     </div>
   </div>
 </div>
