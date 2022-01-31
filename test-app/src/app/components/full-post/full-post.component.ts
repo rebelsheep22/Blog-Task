@@ -17,8 +17,11 @@ import { EditPostComponent } from '../edit-post/edit-post.component';
 })
 export class FullPostComponent implements OnInit {
   id!: string;
+  currentUser!: Users;
   postForm!: FormGroup;
   post!: Post;
+  permissionToEdit!: boolean;
+  permissionToDelete!: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -29,6 +32,7 @@ export class FullPostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('user')!)
     this.post = {};
     this.id = this.route.snapshot.params['id'];
     this.postForm = this.formBuilder.group({
@@ -42,7 +46,14 @@ export class FullPostComponent implements OnInit {
     this.postService
       .getById((parseInt(this.id) - 1).toString())
       .pipe(first())
-      .subscribe((x) => (this.post = x));
+      .subscribe((x) => {
+        this.post = x;
+        if(this.currentUser.groups === "Admin"||(this.post.author === this.currentUser.fullName)){
+          this.permissionToDelete = true;
+          this.permissionToEdit = true;
+        }
+      });
+
   }
   goBack(): void {
     this.router.navigate(['']);

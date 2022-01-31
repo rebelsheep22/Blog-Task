@@ -11,8 +11,8 @@
   <div class="post-footer">
     <footer class="post-author">Author : {{this.post.author}}</footer>
     <div class="post-delete-edit">
-    <button mat-raised-button color="warn" (click)="deletePost()">Delete</button>
-    <button mat-raised-button color="primary" (click)="editPost()">Edit</button>
+    <button mat-raised-button color="warn" *ngIf="permissionToDelete"(click)="deletePost()">Delete</button>
+    <button mat-raised-button color="primary" *ngIf="permissionToEdit" (click)="editPost()">Edit</button>
     </div>
 </div>
 </div>
