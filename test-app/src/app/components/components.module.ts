@@ -13,6 +13,7 @@ import { UsersPageComponent } from './users-page/users-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 
 
@@ -24,7 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
      PageHeaderComponent,
      CreatePostComponent,
      FullPostComponent,
-     UsersPageComponent
+     UsersPageComponent,
+     EditPostComponent
   ],
   imports: [
     CommonModule,

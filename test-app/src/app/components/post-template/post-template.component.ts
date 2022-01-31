@@ -37,10 +37,11 @@ export class PostTemplateComponent implements OnInit {
     const dialogRef = this.openDialog;
     dialogRef.afterClosed().subscribe((res: any) => {
       if (!res) return;
+      console.log(res)
       this.imageURL = res.imgURL.value;
       this.title = res.title.value;
       this.content = res.content.value;
-      this.description = res.description.value;
+      this.description = res.content.value.split(' ').splice(0, 60).join(' ');
       this.uploadDate = res.uploadDate.value;
       this.author = res.author.value;
       this.singlePost = {

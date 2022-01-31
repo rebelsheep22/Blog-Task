@@ -1,13 +1,13 @@
 <div class="header">
   <h1 class="header__title">Blog</h1>
   <div class="header__btns">
-    <button mat-flat-button color="primary" class="form-btn" (click)="usersPage()" [disabled]="this.user.groups!=='Admin' ">
+    <button mat-flat-button color="primary" class="form-btn" (click)="usersPage()" [disabled]="this.user?.groups!=='Admin'">
       Users Page
     </button>
     <button
       mat-raised-button
       color="accent"
-      [disabled]="this.user.groups==='Reader'"
+      [disabled]="this.user?.groups==='Reader'"
       class="header__btn-add"
       (click)="addNewPost()"
     >

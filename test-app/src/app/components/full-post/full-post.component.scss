@@ -15,4 +15,13 @@
     width: 700px;
     align-self: center;
   }
+  &-footer{
+    display: flex;
+    justify-content: space-between;
+  }
+  &-delete-edit{
+    button{
+      margin-right: 10px;
+    }
+  }
 }

@@ -1,0 +1,22 @@
+
+<body>
+  <h1 mat-dialog-title >Edit Post</h1>
+  <div mat-dialog-content class="create-post-container">
+    <form [formGroup]="editPostForm" class="create-post-form">
+      <mat-form-field>
+        <input type="text" matInput formControlName="title">
+        <mat-label for="title">Title</mat-label>
+        <mat-error *ngIf="editPostForm.controls['title'].errors">The title must be 5-15 characters long</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="textarea">
+        <textarea rows="10" id="content" matInput formControlName="content" placeholder="Content"></textarea>
+        <mat-error> Post content must be from 100 to 500 words</mat-error>
+      </mat-form-field>
+      </form>
+      <div mat-dialog-actions>
+        <button mat-raised-button color="primary" [disabled]="editPostForm.invalid" [mat-dialog-close]="editPostForm.controls">Save Post</button>
+        <button mat-raised-button  (click)="cancelClick()">Cancel</button>
+      </div>
+  </div>
+
+</body>

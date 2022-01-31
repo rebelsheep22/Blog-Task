@@ -69,11 +69,6 @@ export class CreatePostComponent implements OnInit {
     this.createPostForm.controls['imgURL'].setValue(image);
     this.disableSubmit = false;
   }
-  shorten() {
-    let string = this.createPostForm.controls['content'].value;
-    let shortenedString = string.split(' ').splice(0, 60).join(' ');
-    this.createPostForm.controls['description'].setValue(shortenedString);
-  }
   getDate() {
     let currentDate = new Date();
     let date =
@@ -98,7 +93,6 @@ export class CreatePostComponent implements OnInit {
   }
   savePost() {
     this.setAuthor();
-    this.shorten();
     this.getDate();
   }
 

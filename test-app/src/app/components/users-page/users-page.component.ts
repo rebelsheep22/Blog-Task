@@ -28,7 +28,6 @@ export class UsersPageComponent implements OnInit {
     d.groups = e.value;
     const users = JSON.parse(localStorage.getItem("blog-registration-module")!)
     let user = users.find((x: { id: string | undefined; }) => x.id === d.id);
-    console.log(user)
     Object.assign(user, d);
     localStorage.setItem("blog-registration-module", JSON.stringify(users));
   }

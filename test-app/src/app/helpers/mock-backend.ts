@@ -28,6 +28,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
         return register();
       } else if (url.match(/\/posts\/\d+$/) && method === 'GET') {
         return getPostById();
+      } else if (url.match(/\/posts\/\d+$/) && method === 'DELETE') {
+        return deletePostById();
+      } else if (url.match(/\/posts\/\d+$/) && method === 'PUT') {
+        return updatePost();
       } else if (url.endsWith('users/author') && method == 'GET') {
         return getAuthorUser();
       } else if (url.endsWith('/users') && method == 'GET') {
@@ -106,6 +110,23 @@ export class MockBackendInterceptor implements HttpInterceptor {
       const post = posts.find((x: { id: any }) => x.id === idFromUrl());
       return ok(postDetails(post));
     }
+    function deletePostById() {
+      let posts = JSON.parse(localStorage.getItem(postsKey)!) || [];
+      const post = posts.filter((x: { id: any }) => x.id !== idFromUrl());
+      localStorage.setItem(postsKey, JSON.stringify(post));
+      return ok(postDetails(post));
+    }
+    function updatePost() {
+      let posts = JSON.parse(localStorage.getItem(postsKey)!) || [];
+      let params = body;
+      let post = posts.find((x: { id: string; }) => x.id === idFromUrl());
+
+      // update and save user
+      Object.assign(post, params);
+      localStorage.setItem(postsKey, JSON.stringify(posts));
+
+      return ok();
+  }
     function getAuthorUser() {
       let users = JSON.parse(localStorage.getItem(usersKey)!) || [];
 
