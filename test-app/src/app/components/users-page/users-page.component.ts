@@ -11,16 +11,17 @@ import { AccountServiceService } from 'src/services/account-service.service';
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent implements OnInit {
-  displayedColumns: string[] = ['fullName', 'email', 'groups', 'creationDate'];
+  displayedColumns: string[] = ['fullName', 'email',  'creationDate', 'groups'];
   dataSource:any;
-  smh = "admin"
   users!: Users[];
   selectedGroup!: string;
+  currentUser!:Users;
   constructor(public accountService : AccountServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.accountService.getUserAuthor().subscribe((x:Users)=>
+    {this.currentUser = x})
     this.accountService.getUsers().subscribe(x=>{this.users = x})
-
   }
   permissionChange(e: any,d:Users):void{
     console.log(d)
@@ -30,7 +31,6 @@ export class UsersPageComponent implements OnInit {
     console.log(user)
     Object.assign(user, d);
     localStorage.setItem("blog-registration-module", JSON.stringify(users));
-
   }
   goBack(): void {
     this.router.navigate(['']);

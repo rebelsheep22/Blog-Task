@@ -3,9 +3,16 @@
   flex-direction: column;
   padding: 10px;
   &-header{
+    margin-top: 10px;
     align-self: center;
+    font-size: 40px;
+
   }
   &-image{
+    align-self: center;
+  }
+  &-content{
+    width: 700px;
     align-self: center;
   }
 }

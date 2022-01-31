@@ -68,7 +68,7 @@ export class RegisterComponent implements OnInit {
           ),
         ],
       ],
-      groups: [null],
+      groups: ['Reader'],
       creationDate: [null],
     });
   }

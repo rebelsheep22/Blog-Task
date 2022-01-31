@@ -12,9 +12,11 @@
   z-index: 999px;
   top:0;
   position: sticky;
+  background-color: #10141c;
   &__title{
     padding-top: 10px;
-    padding-left: 10px
+    padding-left: 10px;
+    color: $white;
   }
   &__btns{
     padding-top: 10px;

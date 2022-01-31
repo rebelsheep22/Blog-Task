@@ -21,6 +21,7 @@ export class PageHeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log("test")
     this.openDialog = false;
     this.accountService.getUserAuthor().subscribe((x:Users)=>
     {this.user = x})

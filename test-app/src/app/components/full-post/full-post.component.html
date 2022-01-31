@@ -1,7 +1,7 @@
 <div class="post">
-  <button mat-raised-button (click)="goBack()">Go Back</button>
+  <button mat-raised-button color="warn" (click)="goBack()">Go Back</button>
   <h1 class="post-header">{{this.post.title ? this.post.title : ""}}</h1>
-  <h3 class="post-added">Date Added:{{this.post.uploadDate}}</h3>
+  <h3 class="post-added">Date Added: {{this.post.uploadDate}}</h3>
   <div class="post-image">
     <img src="data:image/png;base64,{{this.post.imgURL}}" alt="">
   </div>

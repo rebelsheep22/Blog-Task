@@ -13,7 +13,6 @@ import { Users } from 'src/models/users';
 
 const usersKey = 'blog-registration-module';
 const postsKey = 'postsArray';
-let users = JSON.parse(localStorage.getItem(usersKey)!) || [];
 @Injectable()
 export class MockBackendInterceptor implements HttpInterceptor {
   intercept(
@@ -29,20 +28,17 @@ export class MockBackendInterceptor implements HttpInterceptor {
         return register();
       } else if (url.match(/\/posts\/\d+$/) && method === 'GET') {
         return getPostById();
-      }
-      else if (url.endsWith('users/author') && method == 'GET'){
+      } else if (url.endsWith('users/author') && method == 'GET') {
         return getAuthorUser();
-      }
-      else if (url.endsWith('/users') && method == 'GET'){
+      } else if (url.endsWith('/users') && method == 'GET') {
         return getUsers();
-      }
-      else if (url.endsWith('/currentusers') && method == 'GET'){
+      } else if (url.endsWith('/currentusers') && method == 'GET') {
         return getCurrentUser();
       }
-
     }
     function authenticate() {
       const { email, password } = body;
+      let users = JSON.parse(localStorage.getItem(usersKey)!) || [];
       const user = users.find(
         (x: Users) => x.email === email && x.passwords.password === password
       );
@@ -59,7 +55,7 @@ export class MockBackendInterceptor implements HttpInterceptor {
       groups: any;
       creationDate: any;
     }) {
-      const { id, fullName, email, groups, creationDate} = user;
+      const { id, fullName, email, groups, creationDate } = user;
       return { id, fullName, email, groups, creationDate };
     }
     function postDetails(post: {
@@ -68,13 +64,14 @@ export class MockBackendInterceptor implements HttpInterceptor {
       content: any;
       imgURL: any;
       uploadDate: any;
-      author:any;
+      author: any;
     }) {
-      const { id, title, content, imgURL, uploadDate,author } = post;
-      return { id, title, content, imgURL, uploadDate,author };
+      const { id, title, content, imgURL, uploadDate, author } = post;
+      return { id, title, content, imgURL, uploadDate, author };
     }
     function register() {
       const user = body;
+      let users = JSON.parse(localStorage.getItem(usersKey)!) || [];
 
       if (users.find((x: { email: string }) => x.email === user.email)) {
         return error('Email "' + user.email + '" is already taken');
@@ -93,10 +90,10 @@ export class MockBackendInterceptor implements HttpInterceptor {
     function isLoggedIn() {
       return headers.get('Authorization') === 'Bearer fake-jwt-token';
     }
-    function getCurrentUser(){
+    function getCurrentUser() {
       const user = JSON.parse(localStorage.getItem('user')!) || [];
-      console.log(user)
-      return ok(basicDetails(user))
+      console.log(user);
+      return ok(basicDetails(user));
     }
     function unauthorized() {
       return throwError({
@@ -109,19 +106,31 @@ export class MockBackendInterceptor implements HttpInterceptor {
       const post = posts.find((x: { id: any }) => x.id === idFromUrl());
       return ok(postDetails(post));
     }
-    function getAuthorUser(){
-let authoringUser = JSON.parse(localStorage.getItem('user')!) || [];
+    function getAuthorUser() {
+      let users = JSON.parse(localStorage.getItem(usersKey)!) || [];
 
+      let authoringUser = JSON.parse(localStorage.getItem('user')!) || [];
       const authorId = authoringUser.id;
-      const user = users.find((x: { id: string; })=> x.id == authorId)
-      return ok(basicDetails(user))
+      const user = users.find((x: { id: string }) => x.id == authorId);
+      return ok(basicDetails(user));
     }
     function idFromUrl() {
       const urlParts = url.split('/');
       return urlParts[urlParts.length - 1];
     }
     function getUsers() {
-      return ok(users.map((x: { id: any; fullName: any; email: any; groups: any; creationDate: any; }) => basicDetails(x)));
+      let users = JSON.parse(localStorage.getItem(usersKey)!) || [];
+      return ok(
+        users.map(
+          (x: {
+            id: any;
+            fullName: any;
+            email: any;
+            groups: any;
+            creationDate: any;
+          }) => basicDetails(x)
+        )
+      );
     }
     function error(message: string) {
       return throwError({ error: { message } }).pipe(
