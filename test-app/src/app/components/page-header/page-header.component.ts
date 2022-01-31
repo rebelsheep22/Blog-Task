@@ -30,6 +30,9 @@ export class PageHeaderComponent implements OnInit {
     this.openDialog = true;
     this.newItemEvent.emit(this.openDialog);
   }
+  alert(){
+    alert('პოსტის განთავსებისთვის საჭიროა იყოთ რედაქტორების ჯგუფში, დაელოდეთ ადმინისტრატორს.');
+  }
   logout(): void {
     this.accountService.logout();
   }
